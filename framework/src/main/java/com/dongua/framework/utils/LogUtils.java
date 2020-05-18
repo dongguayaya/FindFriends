@@ -35,11 +35,11 @@ public class LogUtils {
             }
         }
     }
-    public static void writeToFile(String text){
+    private static void writeToFile(String text){
         //文件路径
         String filename="/sdcard/FindFriends/FindFriends.log";
         //时间+内存
-        String log=mSimpleDateFormat.format(new Date())+" "+text;
+        String log=mSimpleDateFormat.format(new Date())+" "+text+"\n";
         //检查父路径
         File fileGroup=new File("/sdcard/FindFriends/");
         if(!fileGroup.exists()){

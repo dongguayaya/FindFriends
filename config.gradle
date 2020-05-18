@@ -1,0 +1,18 @@
+ext{
+    //Android配置
+    android = [
+            compileSdkVersion : 29,
+            buildToolsVersion : "29.0.3",
+            applicationId : "com.dongua.rcfindfirends",
+            minSdkVersion : 26,
+            targetSdkVersion : 29,
+            versionCode : 1,
+            versionName : "1.0",
+
+    ]
+    dependencies=[
+            appcompat:  'androidx.appcompat:appcompat:1.1.0',
+            constraintlayout:'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    ]
+}

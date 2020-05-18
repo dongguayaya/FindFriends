@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    //调试
+    if(rootProject.hasProperty('devBuild')){
+        splits.abi.enable=false
+        splits.density.enable=false
+        //禁用png压缩
+        aaptOptions.cruncherEnabled=false
+
+    }
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        applicationId rootProject.ext.android["applicationId"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        //调试
+        resConfigs("zh","xxhdpi")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField("boolean","LOG_DEBUG","true")
+            buildConfigField("String","LOG_TAG","\"FindFriends\"")
+            buildConfigField("String","SP_NAME","\"Config\"")
+        }
+        release {
+            buildConfigField("boolean","LOG_DEBUG","false")
+            buildConfigField("String","LOG_TAG","\"FindFriends\"")
+            buildConfigField("String","SP_NAME","\"Config\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["constraintlayout"]
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path:':framework')
+
+}

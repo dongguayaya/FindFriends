@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongua.findfriends.R;
+import com.dongua.findfriends.test.TestActivity;
 import com.dongua.framework.base.BasePageAdapter;
 import com.dongua.framework.manager.MediaPlayerManager;
 import com.dongua.framework.utils.AnimUtils;
@@ -171,9 +172,15 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.tv_guide_skip:
-                startActivity(new Intent(this,LoginActivity.class));
+                startActivity(new Intent(this, TestActivity.class));
                 finish();
                 break;
         }
     }
-}
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            mGuideMusic.stopPlay();
+        }
+    }

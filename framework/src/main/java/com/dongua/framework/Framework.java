@@ -1,5 +1,10 @@
 package com.dongua.framework;
 
+import android.content.Context;
+
+import com.dongua.framework.manager.BmobManager;
+import com.dongua.framework.utils.SpUtils;
+
 /**
  * FileName:Framework
  * Profile:Framework入口
@@ -19,5 +24,9 @@ public class Framework {
             }
         }
         return mFramework;
+    }
+    public void initFramework(Context mContext){
+        SpUtils.getInstance().initSp(mContext);
+        BmobManager.getInstance().initBmob(mContext);
     }
 }

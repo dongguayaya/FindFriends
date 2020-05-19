@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dongua.framework.utils.SystemUI;
 
-public class BaseUIActivity extends AppCompatActivity {
+public class BaseUIActivity extends BaseActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,6 +9,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -19,12 +20,12 @@
             android:authorities="com.dongua.findfriends.BmobContentProvider">
         </provider>
         <activity android:name=".test.TestActivity">
-
         </activity>
         <!-- oppo适配 -->
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.2" /> <!-- 小米适配 -->
+            android:value="2.2" />
+        <!-- 小米适配 -->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />

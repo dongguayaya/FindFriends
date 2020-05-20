@@ -7,7 +7,6 @@ android {
         splits.density.enable=false
         //禁用png压缩
         aaptOptions.cruncherEnabled=false
-
     }
 
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -20,8 +19,6 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
 
-        //调试
-        resConfigs("zh","xxhdpi")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

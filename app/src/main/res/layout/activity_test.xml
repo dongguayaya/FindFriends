@@ -7,8 +7,9 @@
     android:orientation="vertical"
     tools:context="com.dongua.findfriends.test.TestActivity">
 
-    <com.dongua.framework.view.TouchPicture
-        android:id="@+id/Touch"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"/>
+<Button
+    android:id="@+id/add"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="zeng"/>
 </LinearLayout>

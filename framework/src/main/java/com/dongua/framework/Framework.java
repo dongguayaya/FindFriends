@@ -2,7 +2,7 @@ package com.dongua.framework;
 
 import android.content.Context;
 
-import com.dongua.framework.manager.BmobManager;
+import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.utils.SpUtils;
 
 /**

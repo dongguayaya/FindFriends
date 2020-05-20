@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">校园寻友</string>
+    <string name="code">获取验证码</string>
+    <string name="send">发送</string>
+    <string name="send_Null">电话号码不能为空</string>
+    <string name="code_Null">验证码不能为空</string>
 </resources>

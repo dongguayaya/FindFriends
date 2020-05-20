@@ -21,7 +21,11 @@ import com.dongua.framework.base.BaseUIActivity;
 import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.bmob.IMUser;
 import com.dongua.framework.entity.Constants;
+import com.dongua.framework.manager.DialogManager;
 import com.dongua.framework.utils.SpUtils;
+import com.dongua.framework.view.DialogView;
+import com.dongua.framework.view.LoadingView;
+import com.dongua.framework.view.TouchPicture;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
@@ -41,9 +45,12 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     private Button btnLogin;
     private TextView tvTestLogin;
     private TextView tvUserAgreement;
+    private DialogView mCodeView;
+    private TouchPicture mPicture;
     private static final int H_TIME=1001;
     //60s倒计时
     private static int TIME=60;
+    private LoadingView mLoadingView;
     private Handler mHandler=new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage( Message msg) {
@@ -72,6 +79,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     }
 
     private void initView() {
+        initDialogView();
         etPhone = (EditText) findViewById(R.id.et_phone);
         etCode = (EditText) findViewById(R.id.et_code);
         btnSendCode = (Button) findViewById(R.id.btn_send_code);
@@ -88,11 +96,24 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
 
     }
 
+    private void initDialogView() {
+        mLoadingView=new LoadingView(this);
+        mCodeView=DialogManager.getInstance().initView(this,R.layout.dialog_code_view);
+        mPicture=mCodeView.findViewById(R.id.mPictureV);
+        mPicture.setViewResultListener(new TouchPicture.OnViewResultListener() {
+            @Override
+            public void onResult() {
+                DialogManager.getInstance().hide(mCodeView);
+                sendSMS();
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_send_code:
-                sendSMS();
+                DialogManager.getInstance().show(mCodeView);
                 break;
             case R.id.btn_login:
                 login();
@@ -116,10 +137,13 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
             Toast.makeText(this,getString(R.string.code_Null),Toast.LENGTH_SHORT).show();
             return;
         }
+        //显示loading
+        mLoadingView.show("正在登陆...");
         BmobManager.getInstance().signOrLoginByMobilePhone(phone, code, new LogInListener<IMUser>() {
             @Override
             public void done(IMUser imUser, BmobException e) {
                 if (e == null) {
+                    mLoadingView.hide();
                     //登录成功
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     //把手机号码保存下来

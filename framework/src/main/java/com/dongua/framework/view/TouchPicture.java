@@ -46,6 +46,7 @@ public class TouchPicture extends View {
     private int errorValues=10;
 
     private OnViewResultListener viewResultListener;
+
     public void setViewResultListener(OnViewResultListener viewResultListener){
         this.viewResultListener=viewResultListener;
     }
@@ -139,17 +140,18 @@ public class TouchPicture extends View {
                 //防止越界
                 if(event.getX()>0&&event.getX()<(mWidth-CARD_SIZE)){
                     moveX=(int)event.getX();
-                    if(moveX>(LINE_W-errorValues)&&moveX<(LINE_W+errorValues)){
-                        if(viewResultListener!=null){
-                            viewResultListener.onResult();
-                            //重置
-                            moveX=200;
-                        }
-                    }
                     invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                if(moveX>(LINE_W-errorValues)&&moveX<(LINE_W+errorValues)){
+                    if(viewResultListener!=null){
+                        viewResultListener.onResult();
+                        //重置
+                        moveX=200;
+                        invalidate();
+                    }
+                }
                 /**
                  * 抬起之后做验证
                  * moveX=LINE_W

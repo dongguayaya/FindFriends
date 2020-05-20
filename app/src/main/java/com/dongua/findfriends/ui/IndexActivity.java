@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import com.dongua.findfriends.MainActivity;
 import com.dongua.findfriends.R;
+import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.entity.Constants;
 import com.dongua.framework.utils.SpUtils;
 
@@ -61,8 +62,14 @@ public class IndexActivity extends AppCompatActivity {
             //2.如果非第一次启动、判断是否曾经登陆过
             String token=SpUtils.getInstance().getString(Constants.SP_TOKEN,"");
             if(TextUtils.isEmpty(token)){
-                //跳转到登录页
-                intent.setClass(this,LoginActivity.class);
+                //3.判断Bmob是否登录
+                if(BmobManager.getInstance().isLogin()){
+                    intent.setClass(this,MainActivity.class);
+                }else{
+                    //跳转到登录页
+                    intent.setClass(this,LoginActivity.class);
+                }
+
             }else{
                 //跳转到主页
                 intent.setClass(this, MainActivity.class);

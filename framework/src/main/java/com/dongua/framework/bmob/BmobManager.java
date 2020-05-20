@@ -40,6 +40,13 @@ public class BmobManager {
     }
 
     /**
+     * 判断是否登录
+     * @return
+     */
+    public boolean isLogin(){
+        return BmobUser.isLogin();
+    }
+    /**
      * 获取本地对象
      * @return
      */

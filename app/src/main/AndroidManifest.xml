@@ -30,20 +30,29 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".ui.IndexActivity"></activity>
-        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.IndexActivity">
+
+        </activity>
+        <!--登录页-->
+        <activity android:name=".ui.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+        <!--引导页-->
         <activity
             android:name=".ui.GuideActivity"
             android:theme="@style/AppThemeFull">
+
+        </activity>
+        <!--主页-->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
     </application>

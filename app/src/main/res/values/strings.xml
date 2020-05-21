@@ -4,4 +4,8 @@
     <string name="send">发送</string>
     <string name="send_Null">电话号码不能为空</string>
     <string name="code_Null">验证码不能为空</string>
+    <string name="star">星球</string>
+    <string name="square">广场</string>
+    <string name="chat">聊天</string>
+    <string name="my">我的</string>
 </resources>

@@ -6,14 +6,8 @@ import cn.bmob.v3.BmobUser;
  * 用户类
  */
 public class IMUser extends BmobUser {
-    //Token属性
 
-    //获取Token的头像地址
-    private String tokenPhoto;
-    //获取Token的昵称
-    private String tokenNickName;
 
-    //基本属性
 
     //昵称
     private String nickName;

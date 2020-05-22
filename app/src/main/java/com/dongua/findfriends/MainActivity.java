@@ -1,5 +1,6 @@
 package com.dongua.findfriends;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,12 +25,16 @@ import com.dongua.findfriends.fragment.MyFragment;
 import com.dongua.findfriends.fragment.SquareFragment;
 import com.dongua.findfriends.fragment.StarFragment;
 import com.dongua.findfriends.service.CloudService;
+
 import com.dongua.findfriends.ui.FirstUploadActivity;
+
 import com.dongua.framework.base.BaseUIActivity;
 import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.entity.Constants;
 import com.dongua.framework.manager.DialogManager;
+
 import com.dongua.framework.utils.LogUtils;
+
 import com.dongua.framework.utils.SpUtils;
 import com.dongua.framework.view.DialogView;
 
@@ -111,6 +116,8 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
         initFragment();
         //切换默认的选项卡
         checkMainTab(0);
+        //检查TOKEN
+
 
         //检查Token
         checkToken();
@@ -165,6 +172,8 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
     private void createToken() {
         LogUtils.e("createToken");
     }
+
+
 
     /**
      * 初始化fragment

@@ -12,66 +12,52 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.AddFriendActivity"></activity>
+        <activity android:name=".ui.FirstUploadActivity" />
+        <activity android:name=".test.TestActivity" />
 
-        <activity android:name=".ui.FirstUploadActivity"></activity>
-        <activity android:name=".test.TestActivity" /> 
-        <activity android:name=".ui.IndexActivity" />
-        <activity
-            android:name=".ui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> 
         <service
             android:name=".service.CloudService"
             android:enabled="true"
-            android:exported="true"></service>
-        <!-- Bmob -->
+            android:exported="true" /> <!-- Bmob -->
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.dongua.findfriends.BmobContentProvider"></provider>
-        <!-- oppo适配 -->
+            android:authorities="com.dongua.findfriends.BmobContentProvider" /> <!-- oppo适配 -->
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.2" /> 
-      <!-- 小米适配 -->
+            android:value="2.2" /> <!-- 小米适配 -->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".ui.IndexActivity"></activity> 
-      <!-- 登录页 -->
+        <activity android:name=".ui.IndexActivity"></activity> <!-- 登录页 -->
         <activity
             android:name=".ui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity> 
-      <!-- 引导页 -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 引导页 -->
         <activity
             android:name=".ui.GuideActivity"
-            android:theme="@style/AppThemeFull" >
+            android:theme="@style/AppThemeFull">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-
-            android:authorities="com.dongua.findfriends.BmobContentProvider" /> <!-- 主页 -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity> <!-- 主页 -->
         <service
             android:name=".service.CloudService"
             android:enabled="true"
-            android:exported="true" />
-        <!--FileProvider-->
+            android:exported="true" /> <!-- FileProvider -->
         <provider
-            android:authorities="com.dongua.findfriends.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.dongua.findfriends.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/>
+                android:resource="@xml/filepaths" />
         </provider>
     </application>
 

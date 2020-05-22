@@ -19,4 +19,5 @@
     <string name="text_dialog_camera">拍一张</string>
     <string name="text_dialog_ablum">从相册选择</string>
     <string name="text_dialog_cancel">返回</string>
+    <string name="text_login_phone_null">电话号码不能为空</string>
 </resources>

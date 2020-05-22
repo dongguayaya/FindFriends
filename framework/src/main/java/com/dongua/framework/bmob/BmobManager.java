@@ -5,10 +5,12 @@ import android.content.Context;
 import java.io.File;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -21,7 +23,7 @@ public class BmobManager {
     /**
      * 单例封装
      */
-    private static final String BMOB_SDK_ID="BMOB_SDK_ID";
+    private static final String BMOB_SDK_ID="884ea29111708743552a3ac72f2836ed";
     private volatile static BmobManager mInstance=null;
     private BmobManager(){
 
@@ -117,4 +119,18 @@ public class BmobManager {
         void OnUpdateDone();
         void OnUpdateFail(BmobException e);
     }
+
+    /**
+     * 根据电话号码查询用户
+     * @param phone
+     */
+    public void queryPhoneUser(String phone, FindListener<IMUser> listener){
+        baseQuery("mobilePhoneNumber",phone,listener);
+    }
+    public void baseQuery(String key,String values,FindListener<IMUser> listener){
+        BmobQuery<IMUser> query=new BmobQuery<>();
+        query.addWhereEqualTo(key,values);
+        query.findObjects(listener);
+    }
+
 }

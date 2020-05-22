@@ -91,6 +91,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         iv_guide_star=view1.findViewById(R.id.iv_guide_star);
         iv_guide_night=view2.findViewById(R.id.iv_guide_night);
         iv_guide_smile=view3.findViewById(R.id.iv_guide_smile);
+        ivGuidePoint1.setImageResource(R.drawable.pointer_pink);
         //播放帧动画
         AnimationDrawable animStar=(AnimationDrawable)iv_guide_star.getBackground();
         animStar.start();

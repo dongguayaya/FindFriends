@@ -1,5 +1,6 @@
 package com.dongua.findfriends.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.dongua.findfriends.R;
+import com.dongua.findfriends.ui.AddFriendActivity;
 import com.dongua.framework.adapter.CloudTagAdapter;
 import com.dongua.framework.base.BaseFragment;
 import com.moxun.tagcloudlib.view.TagCloudView;
@@ -75,6 +77,7 @@ public class StarFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.iv_add:
                 //添加好友
+                startActivity(new Intent(getActivity(), AddFriendActivity.class));
                 break;
             case R.id.ll_random:
                 //随机匹配

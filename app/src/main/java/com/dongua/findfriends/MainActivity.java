@@ -31,6 +31,7 @@ import com.dongua.findfriends.ui.FirstUploadActivity;
 import com.dongua.framework.base.BaseUIActivity;
 import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.entity.Constants;
+import com.dongua.framework.java.SimulationData;
 import com.dongua.framework.manager.DialogManager;
 
 import com.dongua.framework.utils.LogUtils;
@@ -121,6 +122,8 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
 
         //检查Token
         checkToken();
+        //模拟数据
+        //SimulationData.testData();
 
 
     }

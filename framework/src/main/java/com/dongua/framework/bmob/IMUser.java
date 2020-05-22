@@ -7,6 +7,8 @@ import cn.bmob.v3.BmobUser;
  */
 public class IMUser extends BmobUser {
 
+    private String tokenPhoto;
+    private String tokenNickName;
 
 
     //昵称
@@ -119,5 +121,20 @@ public class IMUser extends BmobUser {
         this.status = status;
     }
 
-
+    @Override
+    public String toString() {
+        return "IMUser{" +
+                "tokenPhoto='" + tokenPhoto + '\'' +
+                ", tokenNickName='" + tokenNickName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", photo='" + photo + '\'' +
+                ", sex=" + sex +
+                ", desc='" + desc + '\'' +
+                ", age=" + age +
+                ", birthday='" + birthday + '\'' +
+                ", constellation='" + constellation + '\'' +
+                ", hobby='" + hobby + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

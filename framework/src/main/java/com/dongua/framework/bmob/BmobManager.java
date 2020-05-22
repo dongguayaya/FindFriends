@@ -2,11 +2,17 @@ package com.dongua.framework.bmob;
 
 import android.content.Context;
 
+import java.io.File;
+
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * Bmob管理类
@@ -71,5 +77,44 @@ public class BmobManager {
      */
     public void signOrLoginByMobilePhone(String phone,String code,LogInListener<IMUser> listener){
         BmobUser.signOrLoginByMobilePhone(phone,code,listener);
+    }
+    public void uploadFirstPhoto(final String nikeName, File file, final OnUploadPhotoListener listener){
+        /**
+         * 上传文件拿到地址
+         * 更新用户信息
+         */
+        final IMUser imUser=getUser();
+        final BmobFile bmobFile=new BmobFile(file);
+        bmobFile.uploadblock(new UploadFileListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    //上传成功
+                    imUser.setNickName(nikeName);
+                    imUser.setPhoto(bmobFile.getFileUrl());
+
+                    imUser.setTokenNickName(nikeName);
+                    imUser.setTokenPhoto(bmobFile.getFileUrl());
+
+                    //更新用户信息
+                    imUser.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if(e==null){
+                                listener.OnUpdateDone();
+                            }else{
+                                listener.OnUpdateFail(e);
+                            }
+                        }
+                    });
+                }else{
+                    listener.OnUpdateFail(e);
+                }
+            }
+        });
+    }
+    public interface  OnUploadPhotoListener{
+        void OnUpdateDone();
+        void OnUpdateFail(BmobException e);
     }
 }

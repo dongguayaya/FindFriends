@@ -1,5 +1,7 @@
 package com.dongua.findfriends;
 
+
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,10 +25,16 @@ import com.dongua.findfriends.fragment.MyFragment;
 import com.dongua.findfriends.fragment.SquareFragment;
 import com.dongua.findfriends.fragment.StarFragment;
 import com.dongua.findfriends.service.CloudService;
+
+import com.dongua.findfriends.ui.FirstUploadActivity;
+
 import com.dongua.framework.base.BaseUIActivity;
 import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.entity.Constants;
 import com.dongua.framework.manager.DialogManager;
+
+import com.dongua.framework.utils.LogUtils;
+
 import com.dongua.framework.utils.SpUtils;
 import com.dongua.framework.view.DialogView;
 
@@ -47,19 +56,22 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
     private ChatFragment mChatFragment=null;
     private FragmentTransaction mChatTransaction=null;
 
-    //星球
+    //广场
     private ImageView ivsquare;
     private TextView tvsquare;
     private LinearLayout llsquare;
     private SquareFragment mSquareFragment=null;
     private FragmentTransaction mSquareTransaction=null;
 
-    //星球
+    //我的
     private ImageView ivmy;
     private TextView tvmy;
     private LinearLayout llmy;
     private MyFragment mMyFragment=null;
     private FragmentTransaction mMyTransaction=null;
+
+    //跳转上传的回调
+    public static final int UPLOAD_REQUEST_CODE=1002;
     //申请运行时的权限
     private static final int PERSSION_REQUEST_CODE=1000;
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -107,7 +119,58 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
         //检查TOKEN
 
 
+        //检查Token
+        checkToken();
 
+
+    }
+
+    /**
+     * 检查token
+     */
+    private void checkToken() {
+        //获取Token需要三个参数，1.用户ID 2.头像地址 3.昵称
+        String token= SpUtils.getInstance().getString(Constants.SP_TOKEN,"");
+        if(!TextUtils.isEmpty(token)){
+            //启动云服务去连接融云服务
+            startService(new Intent(this, CloudService.class));
+        }else{
+            //1.有三个参数
+            String tokenPhoto=BmobManager.getInstance().getUser().getTokenPhoto();
+            String tokenName=BmobManager.getInstance().getUser().getTokenNickName();
+            if(!TextUtils.isEmpty(tokenPhoto)&&!TextUtils.isEmpty(tokenName)){
+                //创建Token
+                createToken();
+            }else{
+                //创建上传提示框
+                createUploadDialog();
+            }
+        }
+    }
+
+    /**
+     * 创建TOKEN
+     */
+    private void createUploadDialog() {
+        final DialogView mUpLoadView=DialogManager.getInstance().initView(this,R.layout.dialog_first_upload);
+        //外部点击不能消失
+        mUpLoadView.setCancelable(false);
+        ImageView mLoadView=mUpLoadView.findViewById(R.id.iv_go_upload);
+        mLoadView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogManager.getInstance().hide(mUpLoadView);
+                FirstUploadActivity.startActivity(MainActivity.this,UPLOAD_REQUEST_CODE);
+            }
+        });
+        DialogManager.getInstance().show(mUpLoadView);
+    }
+
+    /**
+     * 创建上传提示框
+     */
+    private void createToken() {
+        LogUtils.e("createToken");
     }
 
 
@@ -297,5 +360,13 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        if(resultCode== Activity.RESULT_OK){
+            //说明上传头像成功
+            checkToken();
 
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

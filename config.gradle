@@ -21,10 +21,8 @@ ext{
             okhttp:"com.squareup.okhttp3:okhttp:4.7.1",
             okio:'com.squareup.okio:okio:2.2.2',
             gson:'com.google.code.gson:gson:2.8.5',
+            circleimageview:'de.hdodenhof:circleimageview:3.1.0'
             tagcloud:'com.moxun:tagcloudlib:1.2.0'
-
-
-
     ]
     maven =[
             bombUrl :'https://dl.bintray.com/chaozhouzhang/maven'

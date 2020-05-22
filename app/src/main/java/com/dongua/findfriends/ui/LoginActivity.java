@@ -89,6 +89,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
 
         btnSendCode.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
+        tvTestLogin.setOnClickListener(this);
         String phone=SpUtils.getInstance().getString(Constants.SP_PHONE,"");
         if(!TextUtils.isEmpty(phone)){
             etPhone.setText(phone);
@@ -117,6 +118,9 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
                 break;
             case R.id.btn_login:
                 login();
+                break;
+            case R.id.tv_test_login:
+                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }

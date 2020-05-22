@@ -6,23 +6,22 @@ import cn.bmob.v3.BmobUser;
  * 用户类
  */
 public class IMUser extends BmobUser {
-    //Token属性
-    private String tokenPhoto;
-    //获取Token的昵称
-    private String tokenNickName;
 
-    //基本属性
+
+
     //昵称
-    private String NickName;
+    private String nickName;
     //头像
     private String photo;
+
     //其他属性
-    //性别 true=男 false=女
-    private boolean sex=true;
+
+    //性别 true = 男 false = 女
+    private boolean sex = true;
     //简介
     private String desc;
     //年龄
-    private int age=0;
+    private int age = 0;
     //生日
     private String birthday;
     //星座
@@ -49,11 +48,11 @@ public class IMUser extends BmobUser {
     }
 
     public String getNickName() {
-        return NickName;
+        return nickName;
     }
 
     public void setNickName(String nickName) {
-        NickName = nickName;
+        this.nickName = nickName;
     }
 
     public String getPhoto() {
@@ -119,4 +118,6 @@ public class IMUser extends BmobUser {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
 }

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dongua.findfriends">
 
-
-
     <application
         android:name=".base.BaseApp"
         android:allowBackup="true"
@@ -14,37 +12,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--Bmob-->
+        <service
+            android:name=".service.CloudService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <!-- Bmob -->
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.dongua.findfriends.BmobContentProvider">
-        </provider>
-        <activity android:name=".test.TestActivity">
-        </activity>
-        <!-- oppo适配 -->
+            android:authorities="com.dongua.findfriends.BmobContentProvider"></provider>
+
+        <activity android:name=".test.TestActivity"></activity> <!-- oppo适配 -->
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.2" />
-        <!-- 小米适配 -->
+            android:value="2.2" /> <!-- 小米适配 -->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".ui.IndexActivity">
-
-        </activity>
-        <!--登录页-->
-        <activity android:name=".ui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
-        <!--引导页-->
+        <activity android:name=".ui.IndexActivity"></activity> <!-- 登录页 -->
+        <activity
+            android:name=".ui.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity> <!-- 引导页 -->
         <activity
             android:name=".ui.GuideActivity"
-            android:theme="@style/AppThemeFull">
-
-        </activity>
-        <!--主页-->
+            android:theme="@style/AppThemeFull"></activity> <!-- 主页 -->
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -53,7 +44,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

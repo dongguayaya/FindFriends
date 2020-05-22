@@ -8,4 +8,14 @@
     <string name="square">广场</string>
     <string name="chat">聊天</string>
     <string name="my">我的</string>
+    <string name="text_mian_dialog_text1">欢迎来到校园寻友App</string>
+    <string name="text_mian_dialog_text2">听说你是第一次使用</string>
+    <string name="text_upload_nickname">昵称</string>
+    <string name="text_upload_done">完成</string>
+    <string name="text_upload_photo_title">一张有个性的头像可以吸引人</string>
+    <string name="text_upload_nickname_title">一个名字，一个故事</string>
+    <string name="text_mian_dialog_text3">快来填写资料吧</string>
+    <string name="text_dialog_camera">拍一张</string>
+    <string name="text_dialog_ablum">从相册选择</string>
+    <string name="text_dialog_cancel">返回</string>
 </resources>

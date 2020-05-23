@@ -22,7 +22,9 @@ ext{
             okio:'com.squareup.okio:okio:2.2.2',
             gson:'com.google.code.gson:gson:2.8.5',
             circleimageview:'de.hdodenhof:circleimageview:3.1.0',
-            tagcloud:'com.moxun:tagcloudlib:1.2.0'
+            tagcloud:'com.moxun:tagcloudlib:1.2.0',
+            glide:'com.github.bumptech.glide:glide:4.11.0',
+            compiler:'com.github.bumptech.glide:compiler:4.11.0'
     ]
     maven =[
             bombUrl :'https://dl.bintray.com/chaozhouzhang/maven'

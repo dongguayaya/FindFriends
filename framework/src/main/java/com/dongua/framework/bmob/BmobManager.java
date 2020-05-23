@@ -23,7 +23,7 @@ public class BmobManager {
     /**
      * 单例封装
      */
-    private static final String BMOB_SDK_ID="884ea29111708743552a3ac72f2836ed";
+    private static final String BMOB_SDK_ID="BMOB_SDK_ID";
     private volatile static BmobManager mInstance=null;
     private BmobManager(){
 
@@ -126,6 +126,11 @@ public class BmobManager {
      */
     public void queryPhoneUser(String phone, FindListener<IMUser> listener){
         baseQuery("mobilePhoneNumber",phone,listener);
+    }
+    //查询所有用户
+    public void queryAllUser(FindListener<IMUser> listener){
+        BmobQuery<IMUser> query=new BmobQuery<>();
+        query.findObjects(listener);
     }
     public void baseQuery(String key,String values,FindListener<IMUser> listener){
         BmobQuery<IMUser> query=new BmobQuery<>();

@@ -6,11 +6,12 @@ package com.dongua.findfriends.model;
 public class AddFriendModel {
     private int type;
     private String title;
-    private String phote;
+
+    private String photo;
     private boolean sex;
     private int age;
     private String nikeName;
-    private String description;
+    private String desc;
     private String userId;
 
     public int getType() {
@@ -29,12 +30,12 @@ public class AddFriendModel {
         this.title = title;
     }
 
-    public String getPhote() {
-        return phote;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhote(String phote) {
-        this.phote = phote;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public boolean isSex() {
@@ -61,12 +62,12 @@ public class AddFriendModel {
         this.nikeName = nikeName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getUserId() {

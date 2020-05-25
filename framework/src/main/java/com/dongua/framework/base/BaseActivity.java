@@ -25,7 +25,8 @@ public class BaseActivity extends AppCompatActivity {
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_CONTACTS
     };
     //保存没有同意的权限
     private List<String> mPerList=new ArrayList<>();
@@ -77,9 +78,9 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * 请求权限
      * @param mPermissions
-     * @param requestCode
+     * @param
      */
-    protected void requestPermission(String[] mPermissions,int requestCode){
+    protected void requestPermission(String[] mPermissions ){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
         requestPermissions(mPermissions,requestCode);
     }
@@ -92,7 +93,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void requestPermissionAll(int requestCode,OnPermissionsResult permissionsResult){
         this.requestCode=requestCode;
         this.permissionsResult=permissionsResult;
-        requestPermission((String[]) mPerList.toArray(new String[mPerList.size()]),requestCode);
+        requestPermission((String[]) mPerList.toArray(new String[mPerList.size()]));
     }
 
     @Override

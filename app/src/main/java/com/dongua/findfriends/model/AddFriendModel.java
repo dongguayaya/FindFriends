@@ -14,6 +14,34 @@ public class AddFriendModel {
     private String desc;
     private String userId;
 
+    private boolean isContact=false;
+    private String contactName;
+    private String contactPhone;
+
+    public boolean isContact() {
+        return isContact;
+    }
+
+    public void setContact(boolean contact) {
+        isContact = contact;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
     public int getType() {
         return type;
     }

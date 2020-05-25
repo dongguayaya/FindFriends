@@ -12,28 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AddFriendActivity"></activity>
+        <activity android:name=".ui.ContactactFriendActivity"></activity>
+        <activity android:name=".ui.AddFriendActivity" />
         <activity android:name=".ui.FirstUploadActivity" />
         <activity android:name=".test.TestActivity" />
 
-        <service
-            android:name=".service.CloudService"
-            android:enabled="true"
-            android:exported="true" /> <!-- Bmob -->
-        <provider
-            android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.dongua.findfriends.BmobContentProvider" /> <!-- oppo适配 -->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.2" /> <!-- 小米适配 -->
-        <meta-data
-            android:name="notch.config"
-            android:value="portrait|landscape" />
-
-        <activity android:name=".ui.IndexActivity"></activity> <!-- 登录页 -->
+        <activity android:name=".ui.IndexActivity" /> <!-- Bmob -->
         <activity
             android:name=".ui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 引导页 -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- oppo适配 -->
         <activity
             android:name=".ui.GuideActivity"
             android:theme="@style/AppThemeFull">
@@ -42,14 +29,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- 小米适配 -->
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity> <!-- 主页 -->
-        <service
-            android:name=".service.CloudService"
-            android:enabled="true"
-            android:exported="true" /> <!-- FileProvider -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.2" /> <!-- 登录页 -->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" /> <!-- 引导页 -->
+        <provider
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:authorities="com.dongua.findfriends.BmobContentProvider" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.dongua.findfriends.fileprovider"
@@ -58,7 +51,15 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
-        </provider>
+        </provider> <!-- 主页 -->
+        <service
+            android:name=".service.CloudService"
+            android:enabled="true"
+            android:exported="true" /> <!-- FileProvider -->
+        <service
+            android:name=".service.CloudService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

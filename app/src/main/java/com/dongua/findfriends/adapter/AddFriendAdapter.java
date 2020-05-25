@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -72,7 +73,12 @@ public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((ContentTitleViewHolder)holder).tv_age.setText(model.getAge()+"岁");
         //设置描述
         ((ContentTitleViewHolder)holder).tv_desc.setText(model.getDesc());
-
+        //通讯录
+        if(model.isContact()){
+            ((ContentTitleViewHolder)holder).ll_contact_info.setVisibility(View.VISIBLE);
+            ((ContentTitleViewHolder)holder).tv_contact_name.setText(model.getContactName());
+            ((ContentTitleViewHolder)holder).tv_contact_phone.setText(model.getContactPhone());
+        }
     }
     //点击事件
     holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +114,9 @@ public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         private TextView tv_nickname;
         private TextView tv_age;
         private TextView tv_desc;
+        private LinearLayout ll_contact_info;
+        private TextView tv_contact_name;
+        private TextView tv_contact_phone;
         public ContentTitleViewHolder(View itemView){
             super(itemView);
             iv_photo=itemView.findViewById(R.id.iv_photo);

@@ -125,23 +125,5 @@ public class BaseActivity extends AppCompatActivity {
         void OnFail(List<String> noPermissions);
     }
 
-    /**
-     * 判断窗口权限
-     * @return
-     */
-    protected boolean checkWindowPermissions(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
-            return Settings.canDrawOverlays(this);
-        }
-        return true;
-    }
 
-    /**
-     * 请求窗口权限
-     * @param requestCode
-     */
-    protected void requestWindowPermissions(int requestCode){
-        Intent intent=new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:"+getPackageName()));
-        startActivityForResult(intent,requestCode);
-    }
 }

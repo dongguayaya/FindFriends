@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.dongua.findfriends.R;
 import com.dongua.findfriends.test.TestActivity;
 import com.dongua.framework.base.BasePageAdapter;
+import com.dongua.framework.base.BaseUIActivity;
 import com.dongua.framework.manager.MediaPlayerManager;
 import com.dongua.framework.utils.AnimUtils;
 
@@ -36,7 +37,7 @@ import java.util.List;
 
 
 
-public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
+public class GuideActivity extends BaseUIActivity implements View.OnClickListener {
 
     private ViewPager vpScoll;
     private TextView tvGuideSkip;

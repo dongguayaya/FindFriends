@@ -3,6 +3,7 @@ package com.dongua.framework;
 import android.content.Context;
 
 import com.dongua.framework.bmob.BmobManager;
+import com.dongua.framework.cloud.CloudManager;
 import com.dongua.framework.utils.SpUtils;
 
 /**
@@ -28,5 +29,6 @@ public class Framework {
     public void initFramework(Context mContext){
         SpUtils.getInstance().initSp(mContext);
         BmobManager.getInstance().initBmob(mContext);
+        CloudManager.getInstance().initCloud(mContext);
     }
 }

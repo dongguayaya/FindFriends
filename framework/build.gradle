@@ -49,4 +49,6 @@ dependencies {
     api rootProject.ext.dependencies["tagcloud"]
     api rootProject.ext.dependencies["glide"]
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //Cloud
+    api project(path: ':IMLib')
 }

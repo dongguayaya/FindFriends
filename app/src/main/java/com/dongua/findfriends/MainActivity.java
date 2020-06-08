@@ -31,15 +31,27 @@ import com.dongua.findfriends.ui.FirstUploadActivity;
 import com.dongua.framework.base.BaseUIActivity;
 import com.dongua.framework.bmob.BmobManager;
 import com.dongua.framework.entity.Constants;
+import com.dongua.framework.gson.TokenBean;
 import com.dongua.framework.java.SimulationData;
 import com.dongua.framework.manager.DialogManager;
 
+import com.dongua.framework.manager.HttpManager;
 import com.dongua.framework.utils.LogUtils;
 
 import com.dongua.framework.utils.SpUtils;
 import com.dongua.framework.view.DialogView;
+import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseUIActivity implements View.OnClickListener {
 
@@ -70,6 +82,7 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
     private LinearLayout llmy;
     private MyFragment mMyFragment=null;
     private FragmentTransaction mMyTransaction=null;
+    private Disposable mDisposable;
 
     //跳转上传的回调
     public static final int UPLOAD_REQUEST_CODE=1002;
@@ -80,12 +93,7 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(!checkWindowPermissions()){
-            requestWindowPermissions(1001);
-        }
-
         initView();
-
     }
 
     private void initView() {
@@ -128,6 +136,7 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
 
     }
 
+
     /**
      * 检查token
      */
@@ -136,7 +145,7 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
         String token= SpUtils.getInstance().getString(Constants.SP_TOKEN,"");
         if(!TextUtils.isEmpty(token)){
             //启动云服务去连接融云服务
-            startService(new Intent(this, CloudService.class));
+            startCloudService();
         }else{
             //1.有三个参数
             String tokenPhoto=BmobManager.getInstance().getUser().getTokenPhoto();
@@ -168,14 +177,63 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
         });
         DialogManager.getInstance().show(mUpLoadView);
     }
+    private void startCloudService(){
+        LogUtils.i("startCloudService");
+        //启动云服务去连接融云服务
+        startService(new Intent(this,CloudService.class));
+
+    }
 
     /**
      * 创建上传提示框
      */
     private void createToken() {
-        LogUtils.e("createToken");
+        LogUtils.i("createToken");
+        /**
+         * 获取融云Token
+         */
+        final HashMap<String,String> map=new HashMap<>();
+        map.put("userId",BmobManager.getInstance().getUser().getObjectId());
+        map.put("name",BmobManager.getInstance().getUser().getTokenNickName());
+        map.put("portraitUri",BmobManager.getInstance().getUser().getTokenPhoto());
+
+        //通过Okhttp请求Token
+        mDisposable=Observable.create(new ObservableOnSubscribe<String>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                //执行请求过程
+                String json=HttpManager.getInstance().postCloudToken(map);
+                emitter.onNext(json);
+                emitter.onComplete();
+            }
+            //线程调度
+        }).subscribeOn(Schedulers.newThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        LogUtils.i("s"+s);
+                        parsingCloudToken(s);
+                    }
+                });
     }
 
+    /**
+     * 解析token
+     * @param s
+     */
+    private void parsingCloudToken(String s) {
+        LogUtils.i("parsingCloudToken");
+        TokenBean tokenBean=new Gson().fromJson(s, TokenBean.class);
+        if(tokenBean.getCode()==200){
+            if(!TextUtils.isEmpty(tokenBean.getToken())){
+                //保存token
+                SpUtils.getInstance().putString(Constants.SP_TOKEN,tokenBean.getToken());
+                startCloudService();
+            }
+        }
+    }
 
 
     /**
@@ -367,9 +425,20 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         if(resultCode== Activity.RESULT_OK){
             //说明上传头像成功
-            checkToken();
+            if(requestCode==UPLOAD_REQUEST_CODE){
+                checkToken();
+            }
+
 
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mDisposable.isDisposed()){
+            mDisposable.dispose();
+        }
     }
 }
